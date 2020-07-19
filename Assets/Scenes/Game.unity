@@ -288,7 +288,7 @@ PrefabInstance:
     - target: {fileID: 3450951753725517397, guid: fcab3f56e5ec3ea42acc6b03e7932ec0,
         type: 3}
       propertyPath: m_Name
-      value: Launch Pa
+      value: Launch Pad
       objectReference: {fileID: 0}
     - target: {fileID: 2600994271112709613, guid: fcab3f56e5ec3ea42acc6b03e7932ec0,
         type: 3}

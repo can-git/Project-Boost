@@ -253,7 +253,7 @@ MonoBehaviour:
   airParticles: {fileID: 8281129525101472816}
   airParticlesR: {fileID: 7359656586266384880}
   rcsTrust: 100
-  mainTrust: 2500
+  mainTrust: 100000
 --- !u!54 &978845304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -967,6 +967,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Particles
       objectReference: {fileID: 0}
+    - target: {fileID: 6963734634853048216, guid: 598324e722f34bb469868268bb64fda4,
+        type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963734634853048216, guid: 598324e722f34bb469868268bb64fda4,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 2.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7064566691334133200, guid: 598324e722f34bb469868268bb64fda4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1021,16 +1031,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 6963734634853048216, guid: 598324e722f34bb469868268bb64fda4,
-        type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6963734634853048216, guid: 598324e722f34bb469868268bb64fda4,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 2.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 598324e722f34bb469868268bb64fda4, type: 3}

@@ -10,6 +10,8 @@ TagManager:
   - Rocket
   - Dead
   - FriendlyP
+  - engineLight
+  - shipLight
   layers:
   - Default
   - TransparentFX

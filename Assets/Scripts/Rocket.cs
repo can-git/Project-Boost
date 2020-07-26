@@ -13,6 +13,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip mainEngine = null;
     [SerializeField] AudioClip success = null;
     [SerializeField] AudioClip death = null;
+    [SerializeField] float levelLoadDelay = 2f;
 
     [SerializeField] ParticleSystem mainEngineParticles = null;
     [SerializeField] ParticleSystem successParticles = null;
@@ -20,6 +21,8 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem fireParticles = null;
     [SerializeField] ParticleSystem airParticles = null;
     [SerializeField] ParticleSystem airParticlesR = null;
+
+    [SerializeField] Light engineLight = null;
 
     [SerializeField] float rcsTrust = 100f;
     [SerializeField] float mainTrust = 100f;
@@ -73,7 +76,7 @@ public class Rocket : MonoBehaviour
         state = State.Dying;
         audioSource.Stop();
         audioSource.PlayOneShot(death);
-        Invoke("NewRocket", 2f);
+        Invoke("NewRocket", levelLoadDelay);
     }
 
     private void StartSuccessSequence()
@@ -85,7 +88,7 @@ public class Rocket : MonoBehaviour
             state = State.Transcending;
             audioSource.Stop();
             audioSource.PlayOneShot(success);
-            //Invoke("LoadNextLevel", 2f);
+            //Invoke("LoadNextLevel", levelLoadDelay);
         }
     }
 
@@ -126,16 +129,19 @@ public class Rocket : MonoBehaviour
         {
             audioSource.Stop();
             mainEngineParticles.Stop();
+            engineLight.intensity = 2f;
         }
     }
 
     private void ApplyThrust()
     {
+        engineLight.intensity = 10f;
         rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
         if (!audioSource.isPlaying)
         {
             audioSource.PlayOneShot(mainEngine);
         }
         mainEngineParticles.Play();
+        
     }
 }

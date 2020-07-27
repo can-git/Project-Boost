@@ -52,14 +52,13 @@ public class Rocket : MonoBehaviour
 
         switch (collision.gameObject.tag)
         {
-            case "FriendlyP":
+            case "FuelP":
 
                 break;
             case "TargetP":
-                StartSuccessSequence();
+                //StartSuccessSequence();
                 break;
             case "Rocket":
-
                 break;
 
             default:
@@ -79,9 +78,16 @@ public class Rocket : MonoBehaviour
         Invoke("NewRocket", levelLoadDelay);
     }
 
+    private void StartRescueSequences()
+    {
+        if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
+        {
+
+        }
+    }
     private void StartSuccessSequence()
     {
-        
+
         if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
         {
             successParticles.Play();
@@ -142,6 +148,6 @@ public class Rocket : MonoBehaviour
             audioSource.PlayOneShot(mainEngine);
         }
         mainEngineParticles.Play();
-        
+
     }
 }

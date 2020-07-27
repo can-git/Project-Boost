@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6130813883351063546}
   m_Layer: 0
   m_Name: Launch Pad
-  m_TagString: FriendlyP
+  m_TagString: FuelP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

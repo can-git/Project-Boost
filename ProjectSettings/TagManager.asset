@@ -12,6 +12,7 @@ TagManager:
   - FriendlyP
   - engineLight
   - shipLight
+  - Alien
   layers:
   - Default
   - TransparentFX

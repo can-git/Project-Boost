@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,9 +27,9 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] float rcsTrust = 100f;
     [SerializeField] float mainTrust = 100f;
-
-    enum State { Alive, Dying, Transcending };
-    State state = State.Alive;
+    bool onPad;
+    enum State { Flying, Dying, Rescuing, Ascending };
+    State state = State.Flying;
 
     void Start()
     {
@@ -39,32 +40,43 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == State.Alive)
+        if (state != State.Ascending)
         {
-            RespondToThrustInput();
-            RespondToRotateInput();
+            if (state != State.Dying)
+            {
+                RespondToThrustInput();
+                RespondToRotateInput();
+            }
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive) { return; } // ignore collisions when dead
+        if (state == State.Dying) { return; } // ignore collisions when dead
 
         switch (collision.gameObject.tag)
         {
+            case "LaunchP":
+                StartSuccessSequence();
+                break;
             case "FuelP":
 
                 break;
-            case "TargetP":
-                //StartSuccessSequence();
-                break;
             case "Rocket":
                 break;
-
+            case "Alien":
+                StartRescueSequences(collision);
+                break;
             default:
                 StartDeathSequences();
                 break;
         }
+
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        onPad = false;
     }
 
     private void StartDeathSequences()
@@ -75,32 +87,52 @@ public class Rocket : MonoBehaviour
         state = State.Dying;
         audioSource.Stop();
         audioSource.PlayOneShot(death);
-        Invoke("NewRocket", levelLoadDelay);
+        Invoke("LevelRestart", levelLoadDelay);
     }
 
-    private void StartRescueSequences()
+    private void StartRescueSequences(Collision coll)
     {
-        if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
-        {
-
-        }
+        state = State.Rescuing;
+        FindObjectOfType<AlienController>().deleteCount();
+        Destroy(coll.gameObject);
     }
+   
     private void StartSuccessSequence()
     {
-
-        if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
+        if (FindObjectOfType<AlienController>().getCount() <= 0)
         {
-            successParticles.Play();
-            state = State.Transcending;
-            audioSource.Stop();
-            audioSource.PlayOneShot(success);
-            //Invoke("LoadNextLevel", levelLoadDelay);
+            if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
+            {
+                state = State.Ascending;
+                successParticles.Play();
+                audioSource.Stop();
+                audioSource.PlayOneShot(success);
+                Invoke("LevelRestart", levelLoadDelay);
+            }
         }
     }
+    public void stateFlying()
+    {
+        state = State.Flying;
+    }
+    public void stateDying()
+    {
+        state = State.Dying;
+    }
+    public void stateRescue()
+    {
+        state = State.Rescuing;
+    }
+
 
     private void NewRocket()
     {
         FindObjectOfType<RocketSpawner>().newRocket();
+    }
+
+    private void LevelRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private static void LoadNextLevel()
@@ -148,6 +180,10 @@ public class Rocket : MonoBehaviour
             audioSource.PlayOneShot(mainEngine);
         }
         mainEngineParticles.Play();
+
+    }
+    private void RespondToTheEnding()
+    {
 
     }
 }

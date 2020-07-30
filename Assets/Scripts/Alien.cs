@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Alien : MonoBehaviour
 {
-    [SerializeField] GameObject rocket = null;
-    Vector3 bu;
-    void Start()
+    bool durum = false;
+    Vector3 rocketPos;
+    private void Update()
     {
-        bu = rocket.transform.position;
+        if (durum)
+        {
+            transform.position = Vector3.MoveTowards(this.transform.position, rocketPos, .4f * Time.deltaTime);
+        }
     }
-    public void jumpToTheRocket()
+    public void jumpToTheRocket(Vector3 rocketPos)
     {
-        
-
+        durum = true;
+        this.rocketPos = rocketPos;
     }
-    // Update is called once per frame
-    void Update()
+    public void ChangeDurum()
     {
-        Debug.Log(bu);
-        transform.Translate(bu * Time.deltaTime * 20f);
+        durum = false;
     }
 }

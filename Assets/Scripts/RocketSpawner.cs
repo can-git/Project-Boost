@@ -14,6 +14,7 @@ public class RocketSpawner : MonoBehaviour
         Vector3 bu = transform.position;
         bu.y = bu.y + 5;
         Instantiate(rocket, bu , transform.rotation);
+        
     } 
     // Update is called once per frame
     void Update()

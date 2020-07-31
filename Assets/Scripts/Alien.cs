@@ -6,6 +6,10 @@ public class Alien : MonoBehaviour
 {
     bool durum = false;
     Vector3 rocketPos;
+    private void Awake()
+    {
+        FindObjectOfType<AlienController>().addCount();
+    }
     private void Update()
     {
         if (durum)

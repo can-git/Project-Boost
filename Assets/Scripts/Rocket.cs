@@ -27,7 +27,7 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] float rcsTrust = 100f;
     [SerializeField] float mainTrust = 100f;
-    bool onPad;
+
     enum State { Flying, Dying, Rescuing, Ascending };
     State state = State.Flying;
 
@@ -74,10 +74,7 @@ public class Rocket : MonoBehaviour
         }
 
     }
-    private void OnCollisionExit(Collision collision)
-    {
-        onPad = false;
-    }
+
 
     private void StartDeathSequences()
     {

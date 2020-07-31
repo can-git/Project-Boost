@@ -20,12 +20,14 @@ public class Platform : MonoBehaviour
     {
         for (int i = 0; i < alienCount; i++)
         {
-            aliens.Add(Instantiate(prefab, this.gameObject.transform.position + new Vector3(Mathf.RoundToInt(Random.Range(-1 * (this.gameObject.transform.localScale.x / 2), this.gameObject.transform.localScale.x / 2)), this.gameObject.transform.localScale.y, Random.Range(-1 * (this.gameObject.transform.localScale.z / 2), this.gameObject.transform.localScale.z / 2)), Quaternion.identity));
+            aliens.Add(Instantiate(prefab,
+                this.gameObject.transform.position + new Vector3(Mathf.RoundToInt(Random.Range(-1 * (this.gameObject.transform.localScale.x / 2), this.gameObject.transform.localScale.x / 2)), this.gameObject.transform.localScale.y, Random.Range(-1 * (this.gameObject.transform.localScale.z / 2), this.gameObject.transform.localScale.z / 2)),
+                Quaternion.identity));
         }
+
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.transform.rotation.z);
         foreach (Alien alien in aliens)
         {
             if (collision.gameObject.transform.rotation.z >= -.1f && collision.gameObject.transform.rotation.z <= .1f)
@@ -41,5 +43,4 @@ public class Platform : MonoBehaviour
             alien.ChangeDurum();
         }
     }
-
 }

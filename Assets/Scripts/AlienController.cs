@@ -8,14 +8,8 @@ public class AlienController : MonoBehaviour
     AudioSource audioSource;
     void Start()
     {
-        foreach (Alien alien in FindObjectsOfType<Alien>())
-        {
-            addCount();
-        }
         audioSource = GetComponent<AudioSource>();
     }
-
-
     public void addCount()
     {
         count++;

@@ -530,6 +530,7 @@ MonoBehaviour:
   airParticles: {fileID: 8281129525101472816}
   airParticlesR: {fileID: 7359656586266384880}
   engineLight: {fileID: 4882471478679894466}
+  controlDeath: 1
   rcsTrust: 100
   mainTrust: 100000
 --- !u!54 &978845304

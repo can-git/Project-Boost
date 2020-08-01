@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Alien.cs" />
     <Compile Include="Assets\Scripts\AlienController.cs" />
+    <Compile Include="Assets\Scripts\OilController.cs" />
     <Compile Include="Assets\Scripts\Oscillator.cs" />
     <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\Scripts\Rocket.cs" />

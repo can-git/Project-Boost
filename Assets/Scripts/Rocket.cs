@@ -25,11 +25,16 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] Light engineLight = null;
 
+    [SerializeField] bool controlDeath = true;
+
     [SerializeField] float rcsTrust = 100f;
     [SerializeField] float mainTrust = 100f;
 
+
     enum State { Flying, Dying, Rescuing, Ascending };
     State state = State.Flying;
+
+    bool onOil = false;
 
     void Start()
     {
@@ -47,23 +52,26 @@ public class Rocket : MonoBehaviour
                 RespondToThrustInput();
                 RespondToRotateInput();
             }
+            if (onOil)
+            {
+                StartOilTransformation();
+            }
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (state == State.Dying) { return; } // ignore collisions when dead
+        if (controlDeath == false) { return; }
 
         switch (collision.gameObject.tag)
         {
             case "LaunchP":
+                onOil = true;
                 StartSuccessSequence();
                 break;
             case "FuelP":
-
-                break;
-            case "Rocket":
+                onOil = true;
                 break;
             case "Alien":
                 StartRescueSequences(collision);
@@ -74,17 +82,33 @@ public class Rocket : MonoBehaviour
         }
 
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        onOil = false;
+    }
 
-
+    private void StartOilTransformation()
+    {
+        if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
+        {
+            if (FindObjectOfType<OilController>().GetValue() < 1000)
+            {
+                FindObjectOfType<OilController>().AddOil();
+            }
+        }
+    }
     private void StartDeathSequences()
     {
-        mainEngineParticles.Stop();
-        deathParticles.Play();
-        fireParticles.Play();
-        state = State.Dying;
-        audioSource.Stop();
-        audioSource.PlayOneShot(death);
-        Invoke("LevelRestart", levelLoadDelay);
+        if (controlDeath)
+        {
+            mainEngineParticles.Stop();
+            deathParticles.Play();
+            fireParticles.Play();
+            state = State.Dying;
+            audioSource.Stop();
+            audioSource.PlayOneShot(death);
+            Invoke("LevelRestart", levelLoadDelay);
+        }
     }
 
     private void StartRescueSequences(Collision coll)
@@ -93,13 +117,13 @@ public class Rocket : MonoBehaviour
         FindObjectOfType<AlienController>().deleteCount();
         Destroy(coll.gameObject);
     }
-   
     private void StartSuccessSequence()
     {
         if (FindObjectOfType<AlienController>().getCount() <= 0)
         {
             if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
             {
+                controlDeath = false;
                 state = State.Ascending;
                 successParticles.Play();
                 audioSource.Stop();
@@ -120,23 +144,18 @@ public class Rocket : MonoBehaviour
     {
         state = State.Rescuing;
     }
-
-
     private void NewRocket()
     {
         FindObjectOfType<RocketSpawner>().newRocket();
     }
-
     private void LevelRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
     private static void LoadNextLevel()
     {
         SceneManager.LoadScene(1);
     }
-
     private void RespondToRotateInput()
     {
         rigidBody.freezeRotation = true;
@@ -152,7 +171,6 @@ public class Rocket : MonoBehaviour
         }
         rigidBody.freezeRotation = false;
     }
-
     private void RespondToThrustInput()
     {
 
@@ -167,20 +185,19 @@ public class Rocket : MonoBehaviour
             engineLight.intensity = 2f;
         }
     }
-
     private void ApplyThrust()
     {
-        engineLight.intensity = 10f;
-        rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
-        if (!audioSource.isPlaying)
+        if (FindObjectOfType<OilController>().GetValue() > 0)
         {
-            audioSource.PlayOneShot(mainEngine);
+            FindObjectOfType<OilController>().SpendOil();
+            engineLight.intensity = 10f;
+            rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(mainEngine);
+            }
+            mainEngineParticles.Play();
         }
-        mainEngineParticles.Play();
-
-    }
-    private void RespondToTheEnding()
-    {
 
     }
 }

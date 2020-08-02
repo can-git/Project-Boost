@@ -36,10 +36,21 @@ public class Rocket : MonoBehaviour
 
     bool onOil = false;
 
+    Vector3 lastPos;
+    float movesSpeed;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    IEnumerator CalcVelocity()
+    {
+        lastPos = this.transform.position;
+        yield return new WaitForFixedUpdate();
+        movesSpeed = Vector3.Distance(this.transform.position, lastPos) / Time.fixedDeltaTime;
+        
     }
 
     // Update is called once per frame
@@ -63,24 +74,29 @@ public class Rocket : MonoBehaviour
     {
         if (state == State.Dying) { return; } // ignore collisions when dead
         if (controlDeath == false) { return; }
-
-        switch (collision.gameObject.tag)
+        if (movesSpeed >= 10)
         {
-            case "LaunchP":
-                onOil = true;
-                StartSuccessSequence();
-                break;
-            case "FuelP":
-                onOil = true;
-                break;
-            case "Alien":
-                StartRescueSequences(collision);
-                break;
-            default:
-                StartDeathSequences();
-                break;
+            StartDeathSequences();
         }
-
+        else
+        {
+            switch (collision.gameObject.tag)
+            {
+                case "LaunchP":
+                    onOil = true;
+                    StartSuccessSequence();
+                    break;
+                case "FuelP":
+                    onOil = true;
+                    break;
+                case "Alien":
+                    StartRescueSequences(collision);
+                    break;
+                default:
+                    StartDeathSequences();
+                    break;
+            }
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -183,12 +199,20 @@ public class Rocket : MonoBehaviour
             audioSource.Stop();
             mainEngineParticles.Stop();
             engineLight.intensity = 2f;
+            //StartCoroutine(applyNotThrust());
         }
+    }
+    IEnumerator applyNotThrust()
+    {
+        yield return new WaitForFixedUpdate();
+        FindObjectOfType<Clock>().decreaseSpeed(movesSpeed);
     }
     private void ApplyThrust()
     {
         if (FindObjectOfType<OilController>().GetValue() > 0)
         {
+
+            StartCoroutine(CalcVelocity());
             FindObjectOfType<OilController>().SpendOil();
             engineLight.intensity = 10f;
             rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
@@ -197,6 +221,7 @@ public class Rocket : MonoBehaviour
                 audioSource.PlayOneShot(mainEngine);
             }
             mainEngineParticles.Play();
+            FindObjectOfType<Clock>().setSpeed(movesSpeed);
         }
 
     }

@@ -6,33 +6,32 @@ using UnityEngine.UI;
 public class OilController : MonoBehaviour
 {
 
-    Slider slider;
-    [SerializeField] int maxValue = 1000;
-    int currentValue;
+
+    [SerializeField] float maxValue = 1f;
+    float currentValue;
 
     void Start()
     {
-        slider = GetComponent<Slider>();
-        slider.value = maxValue;
-        currentValue = maxValue;
+        currentValue = 0f;
     }
 
     void updateValue()
     {
-        slider.value = currentValue;
+        FindObjectOfType<Clock>().setOil(currentValue);
     }
-    public int GetValue()
+    public float GetValue()
     {
         return currentValue;
     }
     public void SpendOil()
     {
-        currentValue--;
+        currentValue = currentValue - 0.002f;
         updateValue();
     }
     public void AddOil()
     {
-        currentValue = currentValue + 2;
+        if (currentValue >= 1f) { return; }
+        currentValue = currentValue + 0.005f;
         updateValue();
     }
 }

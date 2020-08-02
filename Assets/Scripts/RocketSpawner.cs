@@ -12,7 +12,7 @@ public class RocketSpawner : MonoBehaviour
     public void newRocket()
     {
         Vector3 bu = transform.position;
-        bu.y = bu.y + 5;
+        bu.y = bu.y + 3;
         Instantiate(rocket, bu , transform.rotation);
         
     } 

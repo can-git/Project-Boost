@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] int alienCount;
+    [SerializeField] int alienCount = 0;
     [SerializeField] Alien prefab;
     List<Alien> aliens;
     private void Awake()

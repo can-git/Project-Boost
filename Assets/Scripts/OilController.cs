@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class OilController : MonoBehaviour
 {
 
-
-    [SerializeField] float maxValue = 1f;
     float currentValue;
 
     void Start()
@@ -17,7 +15,8 @@ public class OilController : MonoBehaviour
 
     void updateValue()
     {
-        FindObjectOfType<Clock>().setOil(currentValue);
+        this.gameObject.GetComponent<Pointer>().setOil(currentValue);
+        //FindObjectOfType<Pointer>().setOil(currentValue);
     }
     public float GetValue()
     {

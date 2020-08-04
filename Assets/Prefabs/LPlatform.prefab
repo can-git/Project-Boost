@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4495308542830788134}
   - component: {fileID: 5158632155535897963}
   - component: {fileID: 993903258634441909}
-  - component: {fileID: 445392452812363807}
+  - component: {fileID: 1577605446993601560}
   m_Layer: 0
   m_Name: Platform
   m_TagString: LaunchP
@@ -156,7 +156,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &445392452812363807
+--- !u!114 &1577605446993601560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,10 +165,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6296561286523779702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87952bd363355d643ae7ef7f55b9e513, type: 3}
+  m_Script: {fileID: 11500000, guid: fb3898b87f96c064a919320f73c3a7ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket: {fileID: 8943924396894414454, guid: 82503ab3101d9b24aa4fde4b3740551f, type: 3}
+  rocket: {fileID: 1614027537, guid: 82503ab3101d9b24aa4fde4b3740551f, type: 3}
 --- !u!1 &8468505532416614976
 GameObject:
   m_ObjectHideFlags: 0

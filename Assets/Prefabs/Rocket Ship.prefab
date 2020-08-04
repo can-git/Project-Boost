@@ -392,7 +392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8943924396894414454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: -14.953312, y: 4.9109306, z: -1.901293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8943924398323632239}
@@ -530,6 +530,8 @@ MonoBehaviour:
   airParticles: {fileID: 8281129525101472816}
   airParticlesR: {fileID: 7359656586266384880}
   engineLight: {fileID: 4882471478679894466}
+  LPlatform: {fileID: 5530831185923326659, guid: 8317af71a11baa248a1999356463ae96,
+    type: 3}
   controlDeath: 1
   rcsTrust: 100
   mainTrust: 100000

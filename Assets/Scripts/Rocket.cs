@@ -25,6 +25,8 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] Light engineLight = null;
 
+    [SerializeField] GameObject LPlatform = null;
+
     [SerializeField] bool controlDeath = true;
 
     [SerializeField] float rcsTrust = 100f;
@@ -36,8 +38,9 @@ public class Rocket : MonoBehaviour
 
     bool onOil = false;
 
-    Vector3 lastPos;
-    float movesSpeed;
+    float lastPos;
+    float movesSpeed = 0f;
+    float velocity;
 
     void Start()
     {
@@ -45,27 +48,21 @@ public class Rocket : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    IEnumerator CalcVelocity()
-    {
-        lastPos = this.transform.position;
-        yield return new WaitForFixedUpdate();
-        movesSpeed = Vector3.Distance(this.transform.position, lastPos) / Time.fixedDeltaTime;
-        
-    }
-
-    // Update is called once per frame
+     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(CalcVelocity());
         if (state != State.Ascending)
         {
             if (state != State.Dying)
             {
+                
                 RespondToThrustInput();
                 RespondToRotateInput();
-            }
-            if (onOil)
-            {
-                StartOilTransformation();
+                if (onOil)
+                {
+                    StartOilTransformation();
+                }
             }
         }
     }
@@ -74,7 +71,7 @@ public class Rocket : MonoBehaviour
     {
         if (state == State.Dying) { return; } // ignore collisions when dead
         if (controlDeath == false) { return; }
-        if (movesSpeed >= 10)
+        if (velocity <= -10)
         {
             StartDeathSequences();
         }
@@ -160,10 +157,7 @@ public class Rocket : MonoBehaviour
     {
         state = State.Rescuing;
     }
-    private void NewRocket()
-    {
-        FindObjectOfType<RocketSpawner>().newRocket();
-    }
+
     private void LevelRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -199,20 +193,19 @@ public class Rocket : MonoBehaviour
             audioSource.Stop();
             mainEngineParticles.Stop();
             engineLight.intensity = 2f;
-            //StartCoroutine(applyNotThrust());
+            FindObjectOfType<Pointer>().State(false);
         }
     }
-    IEnumerator applyNotThrust()
+
+    public float getVelocity()
     {
-        yield return new WaitForFixedUpdate();
-        FindObjectOfType<Clock>().decreaseSpeed(movesSpeed);
+        return movesSpeed;
     }
     private void ApplyThrust()
     {
         if (FindObjectOfType<OilController>().GetValue() > 0)
         {
-
-            StartCoroutine(CalcVelocity());
+            
             FindObjectOfType<OilController>().SpendOil();
             engineLight.intensity = 10f;
             rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
@@ -221,8 +214,18 @@ public class Rocket : MonoBehaviour
                 audioSource.PlayOneShot(mainEngine);
             }
             mainEngineParticles.Play();
-            FindObjectOfType<Clock>().setSpeed(movesSpeed);
+            FindObjectOfType<Pointer>().State(true);
         }
 
+    }
+    IEnumerator CalcVelocity()
+    {
+        lastPos = this.transform.position.y;
+        yield return new WaitForFixedUpdate();
+        if ((this.transform.position.y - lastPos) / Time.fixedDeltaTime >= 0)
+        {
+            movesSpeed = (this.transform.position.y - lastPos) / Time.fixedDeltaTime;
+        }
+        velocity = (this.transform.position.y - lastPos) / Time.fixedDeltaTime;
     }
 }

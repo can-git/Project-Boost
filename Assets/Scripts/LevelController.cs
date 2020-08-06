@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] GameObject MainP;
+    [SerializeField] GameObject LevelP;
     void Start()
     {
         
@@ -15,8 +17,30 @@ public class LevelController : MonoBehaviour
     {
         
     }
+    public void NewGame()
+    {
+        SceneManager.LoadScene(1);
+    }
     public void LevelLoad(int index)
     {
         SceneManager.LoadScene(index);
+    }
+    public void ReturnToMain()
+    {
+        LevelP.SetActive(false);
+        MainP.SetActive(true);
+    }
+    public void OpenTheLevels()
+    {
+        LevelP.SetActive(true);
+        MainP.SetActive(false);
+    }
+    public void LevelRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

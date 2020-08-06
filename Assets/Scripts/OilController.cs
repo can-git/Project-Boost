@@ -10,7 +10,8 @@ public class OilController : MonoBehaviour
 
     void Start()
     {
-        currentValue = 0f;
+        currentValue = 1f;
+        this.gameObject.GetComponent<Pointer>().setOil(currentValue);
     }
 
     void updateValue()

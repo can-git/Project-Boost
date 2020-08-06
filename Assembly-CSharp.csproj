@@ -65,11 +65,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Alien.cs" />
     <Compile Include="Assets\Scripts\AlienController.cs" />
-    <Compile Include="Assets\Scripts\LaunchPlatform.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
     <Compile Include="Assets\Scripts\OilController.cs" />
     <Compile Include="Assets\Scripts\Oscillator.cs" />
-    <Compile Include="Assets\Scripts\Platform.cs" />
+    <Compile Include="Assets\Scripts\Platforms\FuelPlatform.cs" />
+    <Compile Include="Assets\Scripts\Platforms\LaunchPlatform.cs" />
+    <Compile Include="Assets\Scripts\Platforms\TargetPlatform.cs" />
     <Compile Include="Assets\Scripts\Pointer.cs" />
     <Compile Include="Assets\Scripts\Rocket.cs" />
     <Compile Include="Assets\Scripts\RotateCamera.cs" />

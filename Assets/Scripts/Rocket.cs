@@ -27,19 +27,15 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] GameObject LPlatform = null;
 
-    [SerializeField] bool controlDeath = true;
+    [SerializeField] bool canDie = true;
 
     [SerializeField] float rcsTrust = 100f;
     [SerializeField] float mainTrust = 100f;
 
-
-    enum State { Flying, Dying, Rescuing, Ascending };
-    State state = State.Flying;
-
-    bool onOil = false;
+    enum State { Finished,NotFinished};
+    State state = State.NotFinished;
 
     float lastPos;
-    float movesSpeed = 0f;
     float velocity;
 
     void Start()
@@ -48,29 +44,21 @@ public class Rocket : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-     // Update is called once per frame
     void Update()
     {
         StartCoroutine(CalcVelocity());
-        if (state != State.Ascending)
+        if (state == State.NotFinished)
         {
-            if (state != State.Dying)
-            {
-                
-                RespondToThrustInput();
-                RespondToRotateInput();
-                if (onOil)
-                {
-                    StartOilTransformation();
-                }
-            }
+            FindObjectOfType<Pointer>().setSpeed(velocity);
+            RespondToThrustInput();
+            RespondToRotateInput();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (state == State.Dying) { return; } // ignore collisions when dead
-        if (controlDeath == false) { return; }
+        if (state == State.Finished) { return; } // ignore collisions when dead
+        if (canDie == false) { return; }
         if (velocity <= -10)
         {
             StartDeathSequences();
@@ -80,14 +68,9 @@ public class Rocket : MonoBehaviour
             switch (collision.gameObject.tag)
             {
                 case "LaunchP":
-                    onOil = true;
                     StartSuccessSequence();
                     break;
-                case "FuelP":
-                    onOil = true;
-                    break;
-                case "Alien":
-                    StartRescueSequences(collision);
+                case "Friendly":
                     break;
                 default:
                     StartDeathSequences();
@@ -95,40 +78,19 @@ public class Rocket : MonoBehaviour
             }
         }
     }
-    private void OnCollisionExit(Collision collision)
-    {
-        onOil = false;
-    }
 
-    private void StartOilTransformation()
-    {
-        if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
-        {
-            if (FindObjectOfType<OilController>().GetValue() < 1000)
-            {
-                FindObjectOfType<OilController>().AddOil();
-            }
-        }
-    }
     private void StartDeathSequences()
     {
-        if (controlDeath)
+        if (canDie)
         {
             mainEngineParticles.Stop();
             deathParticles.Play();
             fireParticles.Play();
-            state = State.Dying;
+            state = State.Finished;
             audioSource.Stop();
             audioSource.PlayOneShot(death);
             Invoke("LevelRestart", levelLoadDelay);
         }
-    }
-
-    private void StartRescueSequences(Collision coll)
-    {
-        state = State.Rescuing;
-        FindObjectOfType<AlienController>().deleteCount();
-        Destroy(coll.gameObject);
     }
     private void StartSuccessSequence()
     {
@@ -136,35 +98,22 @@ public class Rocket : MonoBehaviour
         {
             if (transform.rotation.z >= -0.1 && transform.rotation.z <= .1)
             {
-                controlDeath = false;
-                state = State.Ascending;
+                canDie = false;
+                state = State.Finished;
                 successParticles.Play();
                 audioSource.Stop();
                 audioSource.PlayOneShot(success);
-                Invoke("LevelRestart", levelLoadDelay);
+                Invoke("LoadNextLevel", levelLoadDelay);
             }
         }
     }
-    public void stateFlying()
-    {
-        state = State.Flying;
-    }
-    public void stateDying()
-    {
-        state = State.Dying;
-    }
-    public void stateRescue()
-    {
-        state = State.Rescuing;
-    }
-
     private void LevelRestart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        FindObjectOfType<LevelController>().LevelRestart();
     }
-    private static void LoadNextLevel()
+    private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1);
+        FindObjectOfType<LevelController>().LevelLoad(SceneManager.GetActiveScene().buildIndex+1);
     }
     private void RespondToRotateInput()
     {
@@ -186,46 +135,33 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            ApplyThrust();
+            if (FindObjectOfType<OilController>().GetValue() > 0)
+            {
+
+                FindObjectOfType<OilController>().SpendOil();
+                engineLight.intensity = 10f;
+                rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(mainEngine);
+                }
+                mainEngineParticles.Play();
+            }
         }
         else
         {
             audioSource.Stop();
             mainEngineParticles.Stop();
             engineLight.intensity = 2f;
-            FindObjectOfType<Pointer>().State(false);
         }
     }
 
-    public float getVelocity()
-    {
-        return movesSpeed;
-    }
-    private void ApplyThrust()
-    {
-        if (FindObjectOfType<OilController>().GetValue() > 0)
-        {
-            
-            FindObjectOfType<OilController>().SpendOil();
-            engineLight.intensity = 10f;
-            rigidBody.AddRelativeForce(Vector3.up * mainTrust * Time.deltaTime);
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
-            mainEngineParticles.Play();
-            FindObjectOfType<Pointer>().State(true);
-        }
 
-    }
+
     IEnumerator CalcVelocity()
     {
         lastPos = this.transform.position.y;
         yield return new WaitForFixedUpdate();
-        if ((this.transform.position.y - lastPos) / Time.fixedDeltaTime >= 0)
-        {
-            movesSpeed = (this.transform.position.y - lastPos) / Time.fixedDeltaTime;
-        }
         velocity = (this.transform.position.y - lastPos) / Time.fixedDeltaTime;
     }
 }

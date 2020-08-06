@@ -63,8 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Assets\AdultLink\RadialProgressBar\Editor\RadialProgressBarEditor.cs" />
-    <Compile Include="Assets\Assets\AdultLink\RadialProgressBar\Editor\SimpleRadialProgressBarEditor.cs" />
+    <Compile Include="Assets\AdultLink\RadialProgressBar\Editor\RadialProgressBarEditor.cs" />
+    <Compile Include="Assets\AdultLink\RadialProgressBar\Editor\SimpleRadialProgressBarEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Users/CAN/Desktop/Unity Workspace/Project Boost/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

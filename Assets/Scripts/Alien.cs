@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Alien : MonoBehaviour
 {
-    bool durum = false;
+    enum State { Stay, Leave };
+
+    State state = State.Stay;
     Vector3 rocketPos;
     private void Awake()
     {
@@ -12,18 +14,26 @@ public class Alien : MonoBehaviour
     }
     private void Update()
     {
-        if (durum)
+        if (state == State.Leave)
         {
             transform.position = Vector3.MoveTowards(this.transform.position, rocketPos, .4f * Time.deltaTime);
         }
     }
-    public void jumpToTheRocket(Vector3 rocketPos)
+    private void OnCollisionEnter(Collision collision)
     {
-        durum = true;
+        if(collision.gameObject.tag == "Rocket")
+        {
+            FindObjectOfType<AlienController>().deleteCount();
+            Destroy(gameObject);
+        }
+    }
+    public void LeaveThePlatform(Vector3 rocketPos)
+    {
+        state = State.Leave;
         this.rocketPos = rocketPos;
     }
-    public void ChangeDurum()
+    public void StayOnThePlatform()
     {
-        durum = false;
+        state = State.Stay;
     }
 }

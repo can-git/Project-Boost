@@ -37,7 +37,6 @@ public class Rocket : MonoBehaviour
 
     float lastPos;
     float velocity;
-
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();

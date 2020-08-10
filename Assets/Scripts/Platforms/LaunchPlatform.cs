@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchPlatform : MonoBehaviour
+public class LaunchPlatform :MonoBehaviour
 {
-
     [SerializeField] Rocket rocket;
 
-    void Start()
+    public void Start()
     {
         Instantiate(rocket,
             new Vector3(
@@ -17,5 +16,4 @@ public class LaunchPlatform : MonoBehaviour
                 ),
             Quaternion.identity);
     }
-
 }

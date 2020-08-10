@@ -11,13 +11,10 @@ public class TargetPlatform : MonoBehaviour
     {
         aliens = new List<Alien>();
     }
-    private void Start()
+  
+    public void Start()
     {
-        RestoreAliens();
-    }
-
-    private void RestoreAliens()
-    {
+        aliens = new List<Alien>();
         for (int i = 0; i < alienCount; i++)
         {
             aliens.Add(Instantiate(prefab,
@@ -25,7 +22,6 @@ public class TargetPlatform : MonoBehaviour
                 Quaternion.identity));
         }
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         foreach (Alien alien in aliens)

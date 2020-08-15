@@ -86,7 +86,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fillpercentage: 0.000002861023
+    - _Fillpercentage: 0.0000019073486
     - _Globalopacity: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5

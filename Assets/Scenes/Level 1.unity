@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b156c008894864949a3e8e240d19846d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienCount: 0
+  alienCount: 2
   prefab: {fileID: 6503324623122228619, guid: bf326f2d51053244d8fedf71bcaf7954, type: 3}
 --- !u!23 &405803539347905810
 MeshRenderer:
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b156c008894864949a3e8e240d19846d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienCount: 0
+  alienCount: 3
   prefab: {fileID: 6503324623122228619, guid: bf326f2d51053244d8fedf71bcaf7954, type: 3}
 --- !u!1 &3166321655647304278
 GameObject:

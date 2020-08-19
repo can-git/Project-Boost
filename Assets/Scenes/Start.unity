@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 114675343}
   - component: {fileID: 114675342}
   m_Layer: 5
-  m_Name: Background Panel
+  m_Name: Select Level Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +679,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 217006227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7937068780933649903}
+        m_MethodName: LevelLoad
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &217006227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,7 +1227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &529595879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2152,7 +2163,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1000496858}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7937068780933649903}
+        m_MethodName: LevelLoad
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1000496858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3792,7 +3814,7 @@ MonoBehaviour:
   airParticlesR: {fileID: 0}
   engineLight: {fileID: 0}
   LPlatform: {fileID: 0}
-  controlDeath: 1
+  canDie: 1
   rcsTrust: 100
   mainTrust: 100000
 --- !u!82 &1615948730
@@ -3908,7 +3930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1630575757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4297,7 +4319,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046561278}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 

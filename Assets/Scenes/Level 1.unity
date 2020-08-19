@@ -582,6 +582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1885943582}
+  - component: {fileID: 1885943580}
   m_Layer: 0
   m_Name: Level Controller
   m_TagString: Untagged
@@ -589,6 +590,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1885943580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885943579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cd2bd2aabd54c43ac3e8b8565dbce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainP: {fileID: 0}
+  LevelP: {fileID: 0}
 --- !u!4 &1885943582
 Transform:
   m_ObjectHideFlags: 0
@@ -2703,6 +2718,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8713022162073686932, guid: 2560c506e3e5c514cacf75023fdfc053,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1885943580}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2560c506e3e5c514cacf75023fdfc053, type: 3}
 --- !u!114 &4792628081178787110

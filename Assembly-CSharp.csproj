@@ -65,8 +65,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Alien.cs" />
     <Compile Include="Assets\Scripts\AlienController.cs" />
-    <Compile Include="Assets\Scripts\IInit.cs" />
-    <Compile Include="Assets\Scripts\Initialize.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
     <Compile Include="Assets\Scripts\OilController.cs" />
     <Compile Include="Assets\Scripts\Oscillator.cs" />

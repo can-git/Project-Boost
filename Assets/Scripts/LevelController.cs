@@ -17,6 +17,11 @@ public class LevelController : MonoBehaviour
     {
         
     }
+    public void LevelScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void NewGame()
     {
         SceneManager.LoadScene(1);

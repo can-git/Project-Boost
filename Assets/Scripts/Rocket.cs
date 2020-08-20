@@ -48,7 +48,7 @@ public class Rocket : MonoBehaviour
         StartCoroutine(CalcVelocity());
         if (state == State.NotFinished)
         {
-            FindObjectOfType<Pointer>().setSpeed(velocity);
+            FindObjectOfType<Pointer>().setVelocity(velocity);
             RespondToThrustInput();
             RespondToRotateInput();
         }

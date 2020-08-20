@@ -6,9 +6,9 @@ using System;
 public class Pointer : MonoBehaviour
 {
 
-    public Material speedMat;
+    public Material velocityMat;
     public Material oilMat;
-    public TextMesh speedText;
+    public TextMesh velocityText;
     public TextMesh minuteText;
 
     public void setOil(float oilValue)
@@ -17,9 +17,9 @@ public class Pointer : MonoBehaviour
         oilMat.SetFloat("_Fillpercentage", oilValue);
     }
 
-    public void setSpeed(float speed)
+    public void setVelocity(float velocity)
     {
-        speedText.text = (speed * 100).ToString("F0");
-        speedMat.SetFloat("_Fillpercentage", speed / 50);
+        velocityText.text = (velocity * 100).ToString("F0");
+        velocityMat.SetFloat("_Fillpercentage", velocity / 50);
     }
 }

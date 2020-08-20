@@ -18,12 +18,13 @@ public class TargetPlatform : MonoBehaviour
         for (int i = 0; i < alienCount; i++)
         {
             aliens.Add(Instantiate(prefab,
-                this.gameObject.transform.position + new Vector3(Mathf.RoundToInt(Random.Range(-1 * (this.gameObject.transform.localScale.x / 2), this.gameObject.transform.localScale.x / 2)), this.gameObject.transform.localScale.y, Random.Range(-1 * (this.gameObject.transform.localScale.z / 2), this.gameObject.transform.localScale.z / 2)),
+                this.gameObject.transform.position + new Vector3(Mathf.RoundToInt(Random.Range(-1 * (this.gameObject.transform.localScale.x / 2), this.gameObject.transform.localScale.x / 2)), this.gameObject.transform.localScale.y+.3f, Random.Range(-1 * (this.gameObject.transform.localScale.z / 2), this.gameObject.transform.localScale.z / 2)),
                 Quaternion.identity));
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
+        
         foreach (Alien alien in aliens)
         {
             if (collision.gameObject.transform.rotation.z >= -.1f && collision.gameObject.transform.rotation.z <= .1f)

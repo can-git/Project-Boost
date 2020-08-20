@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Alien : MonoBehaviour
 {
+    AudioSource audioSource;
+    [SerializeField] AudioClip walkingVoice = null;
     enum State { Stay, Leave };
 
     State state = State.Stay;
@@ -11,12 +13,21 @@ public class Alien : MonoBehaviour
     private void Awake()
     {
         FindObjectOfType<AlienController>().addCount();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
         if (state == State.Leave)
         {
             transform.position = Vector3.MoveTowards(this.transform.position, rocketPos, .4f * Time.deltaTime);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(walkingVoice);
+            }
+        }
+        else
+        {
+            audioSource.Stop();
         }
     }
     private void OnCollisionEnter(Collision collision)

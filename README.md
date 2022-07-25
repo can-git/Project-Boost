@@ -12,6 +12,6 @@ Playable Link : -
 
 In a short review, the missions is rescuing the circle astronouts who are on the platforms and getting back to launcher platform before facing with out of oil issue or crashing somewhere.
 
-New updates will come in the future.
+
 
 

@@ -12,6 +12,7 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+**/.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -20,6 +21,7 @@
 !.vscode/*.code-snippets
 
 .idea
+.csproj
 
 # VSCode
 .vscode

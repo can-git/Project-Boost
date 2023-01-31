@@ -10,7 +10,7 @@ public class OilController : MonoBehaviour
 
     void Start()
     {
-        currentValue = 1f;
+        currentValue = FindObjectOfType<LaunchPlatform>().GetCurrentAmountOfOil();
         this.gameObject.GetComponent<Pointer>().setOil(currentValue);
     }
 
@@ -25,12 +25,14 @@ public class OilController : MonoBehaviour
     }
     public void SpendOil()
     {
-        currentValue = currentValue - 0.002f;
+        currentValue = currentValue - 0.0005f;
         updateValue();
     }
     public void AddOil()
     {
-        if (currentValue >= 1f) { return; }
+        if (currentValue >= 1f) { 
+            return; 
+        }
         currentValue = currentValue + 0.005f;
         updateValue();
     }

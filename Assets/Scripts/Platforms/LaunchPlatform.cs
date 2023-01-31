@@ -5,6 +5,7 @@ using UnityEngine;
 public class LaunchPlatform :MonoBehaviour
 {
     [SerializeField] Rocket rocket;
+    public float amountOfOil = 1f;
 
     public void Start()
     {
@@ -15,5 +16,8 @@ public class LaunchPlatform :MonoBehaviour
                 this.transform.position.z
                 ),
             Quaternion.identity);
+    }
+    public float GetCurrentAmountOfOil(){
+        return amountOfOil;
     }
 }

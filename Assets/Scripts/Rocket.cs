@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using UnityEditorInternal;
+//using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
-
+    
     Rigidbody rigidBody;
     AudioSource audioSource;
     [SerializeField] AudioClip mainEngine = null;
@@ -163,4 +163,6 @@ public class Rocket : MonoBehaviour
         yield return new WaitForFixedUpdate();
         velocity = (this.transform.position.y - lastPos) / Time.fixedDeltaTime;
     }
+
+    
 }

@@ -2,14 +2,17 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: OilM
   m_Shader: {fileID: 4800000, guid: 5c0420a139d72394fb0ce7d877b7d215, type: 3}
-  m_ShaderKeywords: _MAINSCROLLROTATE_SCROLL _SECONDARYSCROLLROTATE_SCROLL
+  m_ValidKeywords:
+  - _MAINSCROLLROTATE_SCROLL
+  - _SECONDARYSCROLLROTATE_SCROLL
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -71,6 +74,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Arcrange: 360
     - _Backgroundborderopacity: 1
@@ -81,7 +85,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fillpercentage: 0.050005782
+    - _Fillpercentage: 0.7649882
     - _Globalopacity: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -134,3 +138,4 @@ Material:
     - _Secondarytexoffset: {r: 0, g: 0, b: 0, a: 0}
     - _Secondarytexscrollspeed: {r: 0, g: 0, b: 0, a: 0}
     - _Secondarytextiling: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

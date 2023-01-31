@@ -1,14 +1,24 @@
 # Project-Boost
-3D Unity Game
+
+<p align="left"><img src="etc/unity.png" height=50></p>
+
+3D Game with Unity
 
 I have started to learn 3D programming from an Udemy course. Some parts of the game have changed from the original project. Here is some images:
 
-Udemy Link : https://www.udemy.com/course/unitycourse2/learn/lecture/8243746#overview
+[<img alt='Udemy' src='etc/originalcourse.png' width="200px" style="padding:15px"/>](https://www.udemy.com/course/unitycourse2/learn/lecture/8243746#overview "See the original course")
+&nbsp;&nbsp;&nbsp;
+[<img alt='WebGL' src='etc/play-online-badge.png' width="200px" style="padding:15px"/>](https://canun.itch.io/project-boost "Play it online")
 
-Playable Link : -
 
-<img src="https://i.ibb.co/JpXxYHT/Ek-A-klama-2020-08-10-160350.png" alt="Ek-A-klama-2020-08-10-160350" border="0">
-<img src="https://i.ibb.co/ymCPbY0/Ek-A-klama-2020-08-10-160430.png" alt="Ek-A-klama-2020-08-10-160430" border="0">
+<p align="left">
+<img src="etc/ss1.png" height=300>
+</p>
+
+
+<p align="left">
+<img src="etc/ss2.png" height=300>
+</p>
 
 In a short review, the missions is rescuing the circle astronouts who are on the platforms and getting back to launcher platform before facing with out of oil issue or crashing somewhere.
 

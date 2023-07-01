@@ -4,7 +4,7 @@
 
 3D Game with Unity
 
-I have started to learn 3D programming from an Udemy course. Some parts of the game have changed from the original project. Here is some images:
+In a short review, the missions is rescuing the circle astronouts who are on the platforms and getting back to launcher platform before facing with out of oil issue or crashing somewhere.
 
 [<img alt='Udemy' src='etc/originalcourse.png' width="200px" style="padding:15px"/>](https://www.udemy.com/course/unitycourse2/learn/lecture/8243746#overview "See the original course")
 &nbsp;&nbsp;&nbsp;
@@ -19,9 +19,3 @@ I have started to learn 3D programming from an Udemy course. Some parts of the g
 <p align="left">
 <img src="etc/ss2.png" height=300>
 </p>
-
-In a short review, the missions is rescuing the circle astronouts who are on the platforms and getting back to launcher platform before facing with out of oil issue or crashing somewhere.
-
-
-
-
